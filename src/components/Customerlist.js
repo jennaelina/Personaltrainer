@@ -137,7 +137,7 @@ export default function Customerlist (){
 
             sortable: false,
             filterable: false,
-            width: 100,
+            width: 200,
             Cell: row => <Addtraining saveTraining={saveTraining} training ={row.original} />
         }
      
