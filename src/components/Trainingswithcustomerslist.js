@@ -3,6 +3,7 @@ import ReactTable from 'react-table';
 import'react-table/react-table.css';
 import Moment from 'moment';
 import Button from '@material-ui/core/Button';
+//import App from '../App.js';
 
 
 
@@ -64,7 +65,15 @@ export default function Trainingswithcustomerslist (){
         
       
    
-    ]    
+    ] 
+    // <App treenit={treenit} data={trainings}/> 
+   /* const treenit = [
+    
+        {
+            start: 'date',
+            title: 'activity'
+        }
+    ]*/
     return (
         <div>
            <Button style= {{margin: 10}} variant="outlined" color="primary" onClick={fetchData}>
@@ -73,7 +82,7 @@ export default function Trainingswithcustomerslist (){
             <ReactTable filterable={true} data={trainings} columns={columns} />
            
            
-       
+           
      
         </div>
     )

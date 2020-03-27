@@ -24,7 +24,7 @@ export default function Customerlist (){
     }
 
     const deleteTraining = (link)  => {
-        if (window.confirm('Are you sure? ')){ 
+        if (window.confirm('Are you sure you want to delete? ')){ 
             fetch(link, {method: 'DELETE'})
             .then(res => fetchData())
             .catch(err => console.error(err))
