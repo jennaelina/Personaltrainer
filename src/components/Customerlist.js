@@ -7,12 +7,36 @@ import Addcustomer from'./Addcustomer'
 import Editcustomer from './Editcustomer';
 import Addtraining from'./Addtraining'
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles(theme => ({
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+  }));
+  
+  const styles = {
+    fontFamily: "sans-serif",
+    textAlign: "center"
+  };
+  
 
 
 export default function Customerlist (){
    const [customers, setCustomers] = useState([]);
    const [open, setOpen] = useState(false);
+   const classes = useStyles();
   
    useEffect(()=> fetchData(), []);
 
@@ -146,6 +170,25 @@ export default function Customerlist (){
     ]    
     return (
         <div>
+
+            
+
+    <AppBar position="static" style={{ background: '#2E3B55' }}>
+        <Toolbar >
+
+
+          <Typography variant="h6" className={classes.title}>
+            Customers
+          </Typography>
+         
+         
+        
+          
+
+       
+         
+        </Toolbar>
+      </AppBar>
             <Addcustomer saveCustomer={saveCustomer} />
             <ReactTable filterable={true} data={customers} columns={columns} />
 

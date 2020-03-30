@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Customerlist from'./components/Customerlist';
 import Traininglist from'./components/Traininglist';
+import Calendar from'./components/Calendar';
 import Trainingswithcustomerslist from'./components/Trainingswithcustomerslist';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -9,6 +10,12 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
+import { Link as Links } from 'react-router-dom';
+import { Drawer } from '@material-ui/core';
+import {BrowserRouter, Switch, Route, Link} from 'react-router-dom'
+
+//import Link from '@material-ui/core/Link';
+
 
 import "./index.css";
 import { render } from "react-dom";
@@ -43,12 +50,28 @@ const styles = {
   textAlign: "center"
 };
 
+const useStyles12 = makeStyles({
+  root: {
+    fontFamily: "sans-serif",
+    //background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+   // border: 0,
+   // borderRadius: 3,
+   // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color: '#2E3B55',
+    height: 48,
+    //padding: '0 30px',
+  },
+});
+
 function App() {
   const classes = useStyles();
 
- 
+  const classes12 = useStyles12();
   const [trainings, setTrainings] = useState([]);
   const [calenderevent, setCalenderevent] = useState([{ title: '', date: '' }]);
+  const [open, setOpen] = useState(false);
+
+  
  
 
    
@@ -72,88 +95,47 @@ function App() {
      }
 
      
-    
+  
 
      
     
  
   return (
     <div className={classes.root}>
+       <BrowserRouter>
 
-    <AppBar position="static" style={{ background: '#2E3B55' }}>
-        <Toolbar >
-
-
-        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Customers
-          </Typography>
-         
-         
-         
-          
-
+       <div className="header" >
+      </div>
+      <h1 className={classes12.root}>Personaltrainer app</h1>
+      <div>
+        <Link to= "/" style={{ fontSize: 'large', fontFamily: "sans-serif", color: '#2E3B55', textDecoration: 'none' }}>Customerlist</Link>{' '}
+        
+        <Link to=  "/components/Traininglist" style={{marginBottom: '30px',marginLeft: '40px',fontSize: 'large', fontFamily: "sans-serif", color: '#2E3B55', textDecoration: 'none' }} >Traininglist</Link>{' '}
+        <Link to=  "/components/Trainingswithcustomerslist" style={{marginLeft: '40px',fontSize: 'large', fontFamily: "sans-serif", color: '#2E3B55', textDecoration: 'none' }}>Trainings with customers</Link>{' '}
+        <Link to=  "/components/Calendar" style={{marginLeft: '40px',fontSize: 'large', fontFamily: "sans-serif", color: '#2E3B55', textDecoration: 'none' }}>Calendar</Link>{' '}
        
-         
-        </Toolbar>
-      </AppBar>
-
-    <Customerlist />
-    
-    <AppBar position="static" style={{ background: '#2E3B55' }}>
-        <Toolbar >
-         
-         
-          <Typography variant="h5" >
-
-            Trainings
-          </Typography>
-         
-        </Toolbar>
-      </AppBar>
-    <Traininglist />
+        <Switch>
+        <Route exact path="/" component={Customerlist}/>
+        <Route path="/components/Traininglist" component={Traininglist}/>
+        <Route path="/components/Customerlist"component={Customerlist}/>
+        <Route path="/components/Calendar"component={Calendar}/>
+        <Route path="/components/Trainingswithcustomerslist"component={Trainingswithcustomerslist}/>
+        <Route path="/components/Trainingswithcustomerslist"render={() => <h1>Contact address</h1>}/>
+        <Route render={() => <h1></h1>}/>
+        </Switch>
+        </div>
 
 
-    <AppBar position="static" style={{ background: '#2E3B55' }}>
-        <Toolbar >
-         
-         
-          <Typography variant="h5" >
 
-            Trainings and customers
-          </Typography>
-         
-        </Toolbar>
-      </AppBar>
-    <Trainingswithcustomerslist />
 
-    <AppBar position="static" style={{ background: '#2E3B55' }}>
-        <Toolbar >
-         
-         
-          <Typography variant="h5" >
 
-            Training calender
-          </Typography>
-         
-        </Toolbar>
-      </AppBar>
-      <FullCalendar
-        defaultView="dayGridMonth"
-        header={{
-          left: "prev,next",
-          center: "title",
-          right: "dayGridMonth,timeGridWeek,timeGridDay"
-        }}
-        plugins={[dayGridPlugin, timeGridPlugin]}
-        events={calenderevent}
-      />
-    
-    <Button style= {{margin: 10}} variant="outlined" color="primary" onClick={fetchData}>
-            update calendar
-         </Button>
+
+
+
+
+
+
+         </BrowserRouter>
     </div>
   );
 }
